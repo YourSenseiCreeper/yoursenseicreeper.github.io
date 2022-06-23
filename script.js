@@ -1,19 +1,15 @@
-function inputChanged() {
-    let value = document.getElementById('input').value;
-    let fontSize = document.getElementById('fontSize').value;
-    let fontColor = document.getElementById('fontColor').value;
-    let accentColor = document.getElementById('accentColor').value;
-    
-    value = value.replaceAll(/గ/g, 'j').replaceAll(/\n/g, ' ').replaceAll(/ǳ/g, 'dz');
+descriptionsMap = {
+    "c#8": "test",
+    "c#9": "test 9"
+};
 
-    let words = value.split(' ');
-    result = "";
-    words.forEach(element => {
-        let splitIndex = element.length / 2;
-        let outputWord = `<span class="bold" style="color: ${accentColor}">${element.slice(0, splitIndex)}</span>${element.slice(splitIndex, element.length)}`;
-        result += outputWord + ' ';
-    });
-    document.getElementById('output').innerHTML = result;
-    document.getElementById('output').style.fontSize = fontSize + 'pt';
-    document.getElementById('output').style.color = fontColor;
+selectedElement = null;
+
+function changeDescription(element, key) {
+    if (selectedElement !==  null) {
+        selectedElement.classList.remove('selected');
+    }
+    element.classList.add('selected');
+    selectedElement = element;
+    document.getElementById("description").innerText = !descriptionsMap[key] ? '' : descriptionsMap[key];
 }
